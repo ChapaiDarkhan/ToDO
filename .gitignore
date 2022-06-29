@@ -4,7 +4,6 @@
 # IPython
 profile_default/
 ipython_config.py
-
 # pyenv
 .python-version
 
@@ -55,3 +54,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 db.sqlite3
+
+settings/static
