@@ -30,7 +30,7 @@ class BooksTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(Task.objects.count(), 1)
         self.assertEqual(Task.objects.get().title, 'test')
 
-        url = f'http://localhost:8000/api/book/{Task.objects.get().id}/'
+        url = f'http://localhost:8000/api/task/{Task.objects.get().id}/'
         response = self.client.patch(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Task.objects.count(), 1)
