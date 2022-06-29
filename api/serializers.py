@@ -14,3 +14,10 @@ class CreateTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title', 'description', 'execution_period')
+
+
+class TaskExecutionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ('id', 'executed')

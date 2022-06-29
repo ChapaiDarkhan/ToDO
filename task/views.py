@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers import TaskSerializer, CreateTaskSerializer
+from api.serializers import TaskSerializer, CreateTaskSerializer, TaskExecutionSerializer
 from .models import Task
 from .tasks import send_message
 
@@ -59,8 +59,14 @@ class TaskDetailView(generics.RetrieveAPIView):
 
 class TaskExecutionView(generics.UpdateAPIView):
     queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+    serializer_class = TaskExecutionSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_object(self, pk):
+        try:
+            return Task.objects.get(pk=pk)
+        except Task.DoesNotExist:
+            raise Http404
 
     def post(self, request, pk):
         task = self.get_object(pk)
