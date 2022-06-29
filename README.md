@@ -1,5 +1,5 @@
-# Book
-Create and update book information
+# TODO
+Create and update task information
 
 ## Installation
 
@@ -32,18 +32,13 @@ API page accessible by this URL Local: "http://127.0.0.1:8000/api"
 In api page you can create, delete and update all the data
 
 
-###You can reach this api for managing with books 
+###You can reach this api for managing with tasks 
 
-http://127.0.0.1:8000/api/book/
+http://127.0.0.1:8000/api/task/
 
 
 If you want to run test run this command:
 
-```bash
-./manage.py test
-```
-
-For running test with docker-compose:
 ```bash
 docker-compose exec web python manage.py test
 ```
