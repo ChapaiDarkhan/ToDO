@@ -1,6 +1,5 @@
 # TODO
-Create and update task information
-
+Create and update task information. Also when you mark task as done or unmark, app send message to your email address.
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
