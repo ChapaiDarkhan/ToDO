@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'tasks',
         'USER': 'tasks',
         'PASSWORD': 'tasks',
-        'HOST': 'db',
+        'HOST': '0.0.0.0',
         'PORT': 5432,
     }
 }
