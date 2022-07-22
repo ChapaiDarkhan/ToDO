@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$POSTGRES_DB" = "books" ]
+if [ "$POSTGRES_DB" = "tasks" ]
 then
     echo "Waiting for postgres..."
 

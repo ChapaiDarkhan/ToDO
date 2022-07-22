@@ -21,7 +21,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/books
+      - .:/tasks
     ports:
       - "8000:8000"
     depends_on:
@@ -34,7 +34,7 @@ services:
       context: .
     command: celery -A task worker -l info
     volumes:
-      - .:/books
+      - .:/tasks
     environment:
       - POSTGRES_DB=tasks
       - POSTGRES_USER=tasks

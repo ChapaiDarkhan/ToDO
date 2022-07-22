@@ -5,13 +5,13 @@ from django.urls import path, include
 from task.models import Task
 
 
-class BooksTests(APITestCase, URLPatternsTestCase):
+class TasksTests(APITestCase, URLPatternsTestCase):
 
     urlpatterns = [
         path('api/', include('task.urls')),
     ]
 
-    def test_create_book(self):
+    def test_create_task(self):
         """
         Ensure we can create a new task object.
         """
