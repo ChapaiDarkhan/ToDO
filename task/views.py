@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import status, generics
@@ -6,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers import TaskSerializer, CreateTaskSerializer, TaskExecutionSerializer
+from task.serializers import TaskSerializer, CreateTaskSerializer, TaskExecutionSerializer
 from .models import Task
 from .tasks import send_message
 
@@ -36,18 +35,18 @@ class TaskDetailView(generics.RetrieveAPIView):
         return Response(task, status=status.HTTP_200_OK)
 
     def patch(self, request, pk):
-        task = self.get_object(pk)
-        task_executed = task.executed
+        task = get_object_or_404(Task, id=pk)
+        task_is_executed = task.is_executed
         serializer = self.get_serializer(task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            if task_executed != serializer.data.get('executed'):
+            if task_is_executed != serializer.data.get('is_executed'):
                 send_message(request.user.id, pk)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        task = self.get_object(pk)
+        task = get_object_or_404(Task, id=pk)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -64,12 +63,12 @@ class TaskExecutionView(generics.UpdateAPIView):
             raise Http404
 
     def post(self, request, pk):
-        task = self.get_object(pk)
-        task_executed = task.executed
+        task = get_object_or_404(Task, id=pk)
+        task_is_executed = task.is_executed
         serializer = self.get_serializer(task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            if task_executed != serializer.data.get('executed'):
+            if task_is_executed != serializer.data.get('is_executed'):
                 send_message(request, pk)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
