@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$POSTGRES_DB" = "tasks" ]
+if [ "$REQUIRE_DB" = "yes" ];
 then
     echo "Waiting for postgres..."
 
