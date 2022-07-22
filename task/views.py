@@ -11,6 +11,7 @@ from .tasks import send_message
 
 
 class TaskView(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         tasks = TaskSerializer(Task.objects.all(), many=True).data
